@@ -78,6 +78,7 @@ export const CountryContextProvider = ({children}: {children: React.ReactNode}) 
             }
         }   
         getCountries();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [queryParam])
 
     return (
