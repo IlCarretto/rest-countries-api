@@ -7,13 +7,14 @@ import { useCountry } from '../Context/CountryContext';
 import { useSearchParams } from 'react-router-dom';
 import {getUpperCaseWord} from '../utils/getUpperCaseWord';
 import Pagination from '../components/Pagination';
+import { Country } from '../type';
 
 
 const Home = () => {
   const regions = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); 
   const [searchParams, setSearchParams] = useSearchParams();
-  const countries = useCountry();
+  const countries = useCountry() as Country[];
 
   const handleFilterByRegion = (region: string) => {
     setSearchParams(`region=${region.toLowerCase()}`);
@@ -30,8 +31,10 @@ const Home = () => {
     setInputValue(e.target.value);
     setCurrentPage(1);
   }
-  const filteredCountries = countries?.filter((country) => country.name.toLowerCase().includes(inputValue.toLowerCase())).slice((currentPage - 1) * countriesPerPage, currentPage * countriesPerPage);
-  const visibleCountries = countries?.filter((country) => country.name.toLowerCase().includes(inputValue.toLowerCase()));
+  const filteredCountries = countries?.length >0 ? countries?.filter((country) => country.name.toLowerCase().includes(inputValue?.toLowerCase())).slice((currentPage - 1) * countriesPerPage, currentPage * countriesPerPage) : [];
+
+  
+  const visibleCountries = countries?.length >0 ? countries?.filter((country) => country?.name?.toLowerCase().includes(inputValue.toLowerCase())): [];
   const totalPages = Math.ceil((visibleCountries?.length || 0) / countriesPerPage);
   
   return (
@@ -57,10 +60,12 @@ const Home = () => {
                 </div>
             </div>
         </form>
+        { !!filteredCountries.length &&
         <div className="container mt-2">
           <CountryList currentCountries={filteredCountries}/>
           <Pagination currPage={currentPage} setCurrPage={setCurrentPage} totalPages={totalPages} currentCountries={filteredCountries}/>
         </div>
+        }
     </main>
   )
 }

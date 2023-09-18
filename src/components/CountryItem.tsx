@@ -1,7 +1,7 @@
 import React from 'react'
 import { Country } from '../type'
 import styled from 'styled-components';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   country: Country;
@@ -22,26 +22,36 @@ const CountryBox = styled.div`
 
   .content {
     padding: 1.4rem;
+
+    p {
+      font-weight: 500;
+    }
+
+    span {
+      font-weight: 300;
+    }
   }
 `
 
 const CountryItem = ({country}: IProps) => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
   
-  const handleOpenCountry = () => {
-    setSearchParams(`country=${country.name.toLowerCase()}`);
-    navigate(`/country/${country.name.toLowerCase()}`)
+  const handleCountryDetails = () => {
+    navigate({
+      pathname: `/countries`,
+      search: `?country=${country.name.toLowerCase()}`
+    })
   }
 
   return (
-    <CountryBox onClick={handleOpenCountry} className='country-item'>
+    <CountryBox onClick={handleCountryDetails} className='country-item'>
         <img src={`${country.flags}`} alt="Bandiera Country" />
       <div className="content">
         <h4>{country.name}</h4>
-        <p className='mt-2'>Population: {country.population.toLocaleString()}</p>
-        <p>Region: {country.region}</p>
-        <p>Capital: {country.capital}</p>
+        <p className='mt-2'>Population: <span>{country.population.toLocaleString()}</span>
+        </p>
+        <p>Region: <span>{country.region}</span></p>
+        <p>Capital: <span>{country.capital}</span></p>
       </div>
     </CountryBox>
   )

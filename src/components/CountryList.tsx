@@ -9,10 +9,10 @@ interface IProps {
 const CountryList = ({currentCountries}: IProps) => {
   return (
     <div>
-      <div className="row justify-content-center">
+      <div className="row g-3">
       {currentCountries && currentCountries.map((country, i) => {
         return (
-            <div key={i} className="col-9 col-md-4 col-lg-3 mt-3">
+            <div key={i} className="col-9 col-md-4 col-lg-3">
               <CountryItem country={country}/>
             </div>
         )

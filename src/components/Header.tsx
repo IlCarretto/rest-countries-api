@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   padding: 0 1.2rem;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
 
   h3 {
     cursor: pointer;

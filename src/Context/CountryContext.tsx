@@ -3,12 +3,12 @@ import { Country } from '../type';
 import { useSearchParams } from 'react-router-dom';
 
 interface IContext {
-    countries: Country[] | undefined;
+    countries: Country[] | undefined | Country;
 }
 
 const CountryContext = createContext<IContext>({countries: []});
 
-export const useCountry = (): Country[] | undefined => {
+export const useCountry = (): Country[] | undefined | Country => {
     const context = useContext(CountryContext);
     if (!context) {
         throw new Error('useCountry error')
@@ -22,29 +22,54 @@ export const CountryContextProvider = ({children}: {children: React.ReactNode}) 
     const selectedRegion = searchParams.get("region")?.toLowerCase();
     const selectedCountry = searchParams.get("country")?.toLowerCase();
 
-    const [countries, setCountries] = useState<Country[] | undefined>(undefined);
+    const [countries, setCountries] = useState<Country[] | undefined | Country>(undefined);
 
+    let queryParam: string;
+    switch (true) {
+        case !!selectedRegion:
+            queryParam = `/region/${selectedRegion}`;
+            break;
+        case !!selectedCountry:
+            queryParam = `/name/${selectedCountry}`;
+            break;
+        default:
+            queryParam = "/all";
+    }
+    const formatResponse = async (selectedCountry: boolean, data: Country[]) => {
+        if (selectedCountry) {
+            const formatDataDetails: Country[] = data.map((country:any) => ({
+                name: country.name.common,
+                population: country.population,
+                region: country.region,
+                flags: country.flags.png,
+                capital: country.capital[0],
+                native: country.name.official,
+                subregion: country.subregion,
+                tld: country.tld[0],
+                currencies: Object.keys(country?.currencies).map(curr => country.currencies[curr].name),
+                languages: country.languages,
+                borders: country.borders
+            }));
+            return formatDataDetails[0];
+        } else {
+            const formattedData: Country[] = data.map((country: any) => ({
+                name: country.name.common,
+                population: country.population,
+                region: country.region,
+                flags: country.flags.png,
+                capital: country.capital
+            }));
+            return formattedData;
+        }
+    }
     useEffect(() => {
         const getCountries = async () =>  {
             try {
-                let resp;
-                if (!selectedRegion) {
-                    resp = await fetch('https://restcountries.com/v3.1/all');
-                } else if (selectedRegion) {
-                    resp = await fetch(`https://restcountries.com/v3.1/region/${selectedRegion}`);
-                } else {
-                    resp = await fetch(`https://restcountries.com/v3.1/name/${selectedCountry}`);
-                }
+                const resp = await fetch(`https://restcountries.com/v3.1${queryParam}`);
                 if (resp.ok) {
                     const data = await resp.json();
-                    const formattedData: Country[] | undefined = data.map((country: any) => ({
-                        name: country.name.common,
-                        population: country.population,
-                        region: country.region,
-                        flags: country.flags.png,
-                        capital: country.capital
-                    }));
-                    setCountries(formattedData);
+                    const responseFormatted = await formatResponse(!!selectedCountry, data);
+                    setCountries(responseFormatted);
                 } else {
                     console.error('Error formatting data', resp.status);
                 }
@@ -53,7 +78,7 @@ export const CountryContextProvider = ({children}: {children: React.ReactNode}) 
             }
         }   
         getCountries();
-    }, [selectedRegion, selectedCountry])
+    }, [queryParam])
 
     return (
         <CountryContext.Provider value={{countries}}>

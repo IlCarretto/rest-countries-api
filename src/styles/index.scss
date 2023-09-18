@@ -39,7 +39,7 @@ button {
 #dark input,
 #dark .custom-select,
 #dark .custom-select ul,
-#dark .pagination button,
+#dark button,
 #dark .country-item {
     background-color: $dark-blue;
 }
@@ -49,7 +49,11 @@ button {
 }
 
 #dark .country-item {
-    border: 12px solid #1d2a32;
+    border: 8px solid #1d2a32;
+}
+
+#dark #country img {
+    outline: 8px solid #1d2a32;
 }
 
 #dark button:disabled {
@@ -62,7 +66,7 @@ button {
 #dark .custom-select svg,
 #dark .custom-select span,
 #dark .custom-select li,
-#dark .pagination button,
+#dark button,
 #dark .pagination .curr-page,
 #dark .country-item {
     color: $white;
@@ -80,4 +84,8 @@ button {
 
 #light header {
     background-color: $white;
+}
+
+#light .form-group ul {
+    background: #fff;
 }

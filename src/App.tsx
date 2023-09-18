@@ -32,7 +32,7 @@ function App() {
               <Header/>
               <Routes>
                 <Route path="/" element={<Home />}/>
-                <Route path="/country/:name" element={<CountryDetails />} />
+                <Route path="/countries" element={<CountryDetails />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
