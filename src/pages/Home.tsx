@@ -19,19 +19,31 @@ const Home = () => {
   const handleFilterByRegion = (region: string) => {
     setSearchParams(`region=${region.toLowerCase()}`);
     setIsDropdownOpen(false);
-    setCurrentPage(1);
+    setCurrentPages({
+      prevPage: 0,
+      currentPage: 1,
+      nextPage: 2
+    });
   }
   const selectedRegion = searchParams.get("region");
   
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPages, setCurrentPages] = useState({
+    prevPage: 0,
+    currentPage: 1,
+    nextPage: 2,
+  });
   const countriesPerPage = 8;
   
   const [inputValue, setInputValue] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
-    setCurrentPage(1);
+    setCurrentPages({
+      prevPage: 0,
+      currentPage: 1,
+      nextPage: 2
+    });
   }
-  const filteredCountries = countries?.length >0 ? countries?.filter((country) => country.name.toLowerCase().includes(inputValue?.toLowerCase())).slice((currentPage - 1) * countriesPerPage, currentPage * countriesPerPage) : [];
+  const filteredCountries = countries?.length >0 ? countries?.filter((country) => country.name.toLowerCase().includes(inputValue?.toLowerCase())).slice((currentPages.currentPage - 1) * countriesPerPage, currentPages.currentPage * countriesPerPage) : [];
 
   
   const visibleCountries = countries?.length >0 ? countries?.filter((country) => country?.name?.toLowerCase().includes(inputValue.toLowerCase())): [];
@@ -63,7 +75,7 @@ const Home = () => {
         { !!filteredCountries.length &&
         <div className="container mt-2">
           <CountryList currentCountries={filteredCountries}/>
-          <Pagination currPage={currentPage} setCurrPage={setCurrentPage} totalPages={totalPages} currentCountries={filteredCountries}/>
+          <Pagination currPages={currentPages} setCurrPages={setCurrentPages} totalPages={totalPages} currentCountries={filteredCountries}/>
         </div>
         }
     </main>

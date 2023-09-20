@@ -40,11 +40,12 @@ button {
 #dark .custom-select,
 #dark .custom-select ul,
 #dark button,
-#dark .country-item {
+#dark .country-item,
+#dark .current {
     background-color: $dark-blue;
 }
 
-#dark .pagination .curr-page {
+#dark .pagination .page-num {
     border: 1px solid $dark-blue;
 }
 
@@ -67,7 +68,7 @@ button {
 #dark .custom-select span,
 #dark .custom-select li,
 #dark button,
-#dark .pagination .curr-page,
+#dark .pagination .page-num,
 #dark .country-item {
     color: $white;
 }
