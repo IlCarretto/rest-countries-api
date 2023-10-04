@@ -95,7 +95,7 @@ const Pagination = ({totalPages, currPages, setCurrPages, currentCountries}: IPr
 
   return (
     <PaginationContainer className='pagination mt-5'>
-        <PrevButton disabled={currentPage === 1 || (currentCountries && currentCountries.length < 8)} onClick={handlePrevPage}>Prev</PrevButton>
+        <PrevButton disabled={currentPage === 1} onClick={handlePrevPage}>Prev</PrevButton>
         <PageBox onClick={() => formatPages("1")} className={`${currentPage < 3 && "d-none"} page-num first`}>1</PageBox>
         <PageBox onClick={() => formatPages("-")} className={`${prevPage < 1 && "d-none"} page-num prev`}>{prevPage}</PageBox>
         <PageBox className='page-num current'>{currentPage}</PageBox>
