@@ -1,46 +1,13 @@
-# Getting Started with Create React App
+<h1>REST COUNTRIES API APP</h1>
+https://ilcarretto-rest-countries-api.netlify.app/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>📷 Screenshot</h2>
 
-## Available Scripts
+![Screenshot 2023-10-04 131814](https://github.com/IlCarretto/rest-countries-api/assets/108265618/5d8195f8-d2ac-405c-ac3e-66c415bd5aed)
 
-In the project directory, you can run:
+<h2>Made with REACT, useContext, Typescript, SCSS, styled-components</h2>
+<h3>Includes API calls, state management, PAGINATION, switch light/dark mode, etc.</h3>
 
-### `npm start`
+<p>I really enjoyed this one project! One of the most complex I've worked on, especially the custom useContext (useCountry) hook I built to manage the API calls. Maybe one thing I'm not really satisfied about is the CountryDetails page: there are some problems with responsiveness, and I couldn't get the logic to get the countries' name of the borders. Also added pagination for fun :)</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
